@@ -10,15 +10,15 @@ package sp4_console_jourdan_brun;
  * @author Dell
  */
 public class Jeton {
-    String couleur;
+   private String couleur;
     
     
-private Jeton(String color){   
+public Jeton(String color){   
       
     couleur = color;
     
 }
-private String lireCouleur(){
+public String lireCouleur(){
     return couleur;
     
 }
@@ -26,9 +26,9 @@ private String lireCouleur(){
 public String toString() { 
 String chaine_a_retourner;
 if (couleur=="jaune"){
-couleur="J";
+    couleur="J";
 }
-if(couleur=="rouge"){
+else if(couleur=="rouge"){
     couleur="R";   
 }
 else{

@@ -18,6 +18,7 @@ public class SP4_console_Jourdan_Brun {
     public static void main(String[] args) {
         
          Jeton j1 = new Jeton("jaune");
+         System.out.println(j1);
          
          
          
