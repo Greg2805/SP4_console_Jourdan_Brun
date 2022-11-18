@@ -13,12 +13,56 @@ public class CelluleDeGrille {
     private Jeton jetonCourant;
     
     public void CelluleDeGrille (){
+        
         jetonCourant=null;
+        
     }
     
+    
     public boolean presenceJeton (){
-        if (jetonCourant =! null){
-            
+        
+        if (jetonCourant != null){
+            return(false);
         }
+        else{
+            return(true);
+        }
+        
     }
+    
+    
+    public void affecterJeton(Jeton jeton_j){
+        
+            jetonCourant=jeton_j;
+       
+    }
+    
+    
+    public String LireCouleurDuJeton (){
+        
+        if (jetonCourant != null){
+            
+            String var;
+            var=jetonCourant.lireCouleur();
+            
+            if(var=="rouge"){
+                return ("rouge");               
+            }
+            
+            else{
+                return("jaune");
+            }
+        
+        }
+        
+        else{
+            return("vide");
+        }
+    
+    
+    }
+    
+    
 }
+
+
