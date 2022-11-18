@@ -62,6 +62,15 @@ public class CelluleDeGrille {
     
     }
     
+    public Jeton recupererJeton(){
+        
+            Jeton temp =jetonCourant;
+            jetonCourant=null;
+            return(temp);
+            
+    }
+        
+    
     
 }
 
