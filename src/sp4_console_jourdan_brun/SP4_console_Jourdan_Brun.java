@@ -9,12 +9,18 @@ package sp4_console_jourdan_brun;
  * @author grego
  */
 public class SP4_console_Jourdan_Brun {
+    
+   
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+         Jeton j1 = new Jeton("jaune");
+         
+         
+         
     }
     
 }
