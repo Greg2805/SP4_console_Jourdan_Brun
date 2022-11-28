@@ -41,8 +41,79 @@ public boolean grilleRemplie(){
     return true;
             
         }
+public void afficherGrilleSurConsole(){
+    for (int i=5;i>0;i--){
+        for (int j=6;i>0;i--){
+            grille[i][j].toString();
+            
+            
+        }
+    }
+}
+public void presenceJeton(int x, int y){
+    grille[x][y].presenceJeton();
+}
+
+public void  lireCouleurDuJeton(int x, int y){
+    grille[x][y].LireCouleurDuJeton();
+}
+
+
+public boolean ligneGagnantePourCouleur(String C){
+    for (int i=5;i>0;i--){
+        for (int j=3;j>0;i--){
+            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i][j+1].LireCouleurDuJeton()& C==grille[i][j+2].LireCouleurDuJeton() & C==grille[i][j+3].LireCouleurDuJeton()){
+                return true;
+            }
+        }
+    }
+return false;  
+}
+
+public boolean colonneGagnantePourCouleur(String C){
+    for (int i=2;i>0;i--){
+        for (int j=6;j>0;i--){
+            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i+1][j].LireCouleurDuJeton()& C==grille[i+2][j].LireCouleurDuJeton() & C==grille[i+3][j].LireCouleurDuJeton()){
+                return true;
+        }
+        }
+    }
+    return false;
+}
+
+public boolean diagonaleMontanteGagnantePourCouleur(String C){
+    for (int i=2;i>0;i--){
+        for (int j=3;j>0;i--){
+            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i+1][j+1].LireCouleurDuJeton()& C==grille[i+2][j+2].LireCouleurDuJeton() & C==grille[i+3][j+3].LireCouleurDuJeton()){
+                return true;
+        }
+        }
+    }
+    return false;
+}
+
+public boolean diagonaleDesencanteGagnantePourCouleur(String C){
+    for (int i=5;i>3;i--){
+        for (int j=3;j>0;i--){
+            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i-1][j+1].LireCouleurDuJeton()& C==grille[i-2][j+2].LireCouleurDuJeton() & C==grille[i-3][j+3].LireCouleurDuJeton()){
+                return true;
+        }
+        }
+    }
+    return false;
+}
+
+
+public boolean etreGagnantePourCouleur(String c){
+    boolean b = ligneGagnantePourCouleur(c);
+    boolean b1 = colonneGagnantePourCouleur(c);
+    boolean b2 = diagonaleMontanteGagnantePourCouleur(c);
+    boolean b3 = diagonaleDesencanteGagnantePourCouleur(c);
     
-
-
+if (b==true||b1==true||b2==true||b3==true){
+    return true;
+}
+return false;
+}
     
         }
