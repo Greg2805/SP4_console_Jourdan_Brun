@@ -115,5 +115,46 @@ if (b==true||b1==true||b2==true||b3==true){
 }
 return false;
 }
-    
+
+public boolean colonneRemplie(int y){
+    if(grille[5][y].presenceJeton()==false){
+        return false;
+    }
+    return true;
+}
+
+
+public void tasserColone(int y){
+    for (int x=0;x<5;x++){
+        if( grille[x][y].presenceJeton()==false ){
+        if( grille[x+1][y].presenceJeton()==true ){
+           
+            Jeton j = grille[x+1][y].recupererJeton();
+            grille[x][y].affecterJeton(j);
         }
+    }
+    
+}
+    
+}
+public void placerTrouNoir(int x, int y){
+    grille[x][y].placerTrouNoir();
+}
+
+public void supprimerTrouNoir(int x, int y){
+    grille[x][y].supprimerTrouNoir();
+}
+
+public void placerDesintegrateur(int x,int y){
+    grille[x][y].presenceDesintegrateur();
+}
+
+public void supprimerJeton(int x, int y){
+    grille[x][y].supprimerJeton();
+}
+
+public void recupererJeton(int x, int y){
+    grille[x][y].recupererJeton();
+}
+
+}
