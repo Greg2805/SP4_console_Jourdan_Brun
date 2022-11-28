@@ -69,27 +69,31 @@ public class CelluleDeGrille {
             return(temp);
             
     }
-    
+        
     @Override
 public String toString() { 
-String clr=LireCouleurDuJeton();
-String chaine_a_retourner;
 
-chaine_a_retourner="erreur";
-if (jetonCourant==null){
-    chaine_a_retourner=".";
-}
-if(clr=="rouge"){
-    chaine_a_retourner="R";   
-}
-if (clr=="jaune"){
-    chaine_a_retourner="J";
-}
+    String clr=LireCouleurDuJeton();
+    String chaine_a_retourner;
 
-return chaine_a_retourner;
+    chaine_a_retourner="erreur";
 
-}
- 
+    if (jetonCourant==null){
+        chaine_a_retourner=".";
+    
+
+        if(clr=="rouge"){
+            chaine_a_retourner="R";   
+        }
+
+        if (clr=="jaune"){
+            chaine_a_retourner="J";
+        }
+    }
+    return chaine_a_retourner;
+
+    }
+    
     
 }
 
