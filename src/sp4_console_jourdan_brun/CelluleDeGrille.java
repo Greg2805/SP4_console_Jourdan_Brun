@@ -11,6 +11,8 @@ package sp4_console_jourdan_brun;
  */
 public class CelluleDeGrille {
     private Jeton jetonCourant;
+    private boolean avoirTrouNoir;
+    private boolean avoirDesintegrateur;
     
     public void CelluleDeGrille (){
         
@@ -21,7 +23,7 @@ public class CelluleDeGrille {
     
     public boolean presenceJeton (){
         
-        if (jetonCourant != null){
+        if (jetonCourant == null){
             return(false);
         }
         else{
@@ -70,6 +72,49 @@ public class CelluleDeGrille {
             
     }
         
+
+    
+public void placerTrouNoir(){
+   avoirTrouNoir=true; 
+}
+public void supprimerTrouNoir(){
+    avoirTrouNoir=false;
+}
+public boolean presenceTrouNoir(){
+    if (avoirTrouNoir == false){
+            return(false);
+        }
+        else{
+            return(true);
+        }
+    
+}
+
+public void supprimerJeton(){
+    jetonCourant= null;
+    
+}
+
+public boolean presenceDesintegrateur(){
+    if (avoirDesintegrateur == false){
+            return(false);
+        }
+        else{
+            return(true);
+        }
+    
+}
+public void placerDesintegrateur(){
+    avoirDesintegrateur=true;
+}
+public void supprimerDesintegrateur (){
+    avoirDesintegrateur=false;
+}
+public void activerTrouNoir(){
+    this.supprimerJeton();
+    this.supprimerTrouNoir();
+}
+
     @Override
 public String toString() { 
 
@@ -89,12 +134,18 @@ public String toString() {
         if (clr=="jaune"){
             chaine_a_retourner="J";
         }
+        if(avoirDesintegrateur==true){
+            chaine_a_retourner="D";
+        }
+        if(avoirTrouNoir==true){
+            chaine_a_retourner="@";
+        }
+            
     }
     return chaine_a_retourner;
 
     }
-    
-    
+
 }
 
 
