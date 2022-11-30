@@ -14,6 +14,7 @@ public class Joueur {
     private String nom;
     private String couleur;
     private ArrayList<Jeton> reserveJetons;
+    private int nombreDesintegrateurs;
     
     public void Joueur (){
     
@@ -38,5 +39,13 @@ public class Joueur {
         int a = nombreDeJetons();
         Jeton j = reserveJetons.remove(a);
         return j;
+    }
+    
+    public void obtenirDesintegrateur(){
+        nombreDesintegrateurs +=1;
+    }
+    
+    public void utiliserDesintegrateur(){
+        nombreDesintegrateurs -=1;
     }
 }
