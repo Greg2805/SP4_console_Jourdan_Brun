@@ -9,12 +9,24 @@ package sp4_console_jourdan_brun;
  * @author Dell
  */
 public class SP4_modegraphique extends javax.swing.JFrame {
-
+private Joueur [] listeJoueurs = new Joueur[2]; 
+    private Joueur joueurCourant;
+    private PlateauDeJeu plateau;
     /**
      * Creates new form SP4_modegraphique
      */
     public SP4_modegraphique() {
         initComponents();
+        panneau_info_joueur.setVisible(false);
+        panneau_info_partie.setVisible(false);
+        
+        
+        for(int i=5;i>=0;i--){
+            for(int j=0;j<7;j++){ 
+               CelluleGraphique cellGraph = new CelluleGraphique();
+               panneaugrille.add(cellGraph);
+            }
+        }
     }
 
     /**
@@ -192,7 +204,8 @@ public class SP4_modegraphique extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_startActionPerformed
-        // TODO add your handling code here:
+    panneau_info_joueur.setVisible(true);
+    panneau_info_partie.setVisible(true);        
     }//GEN-LAST:event_Btn_startActionPerformed
 
     private void Btn_col_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_0ActionPerformed
@@ -207,6 +220,8 @@ public class SP4_modegraphique extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        System.out.println("OK");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
