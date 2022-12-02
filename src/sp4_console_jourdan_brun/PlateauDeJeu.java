@@ -19,6 +19,7 @@ public PlateauDeJeu(){
         }
     }
 }
+
 public int ajouterJetonDansColonne(Jeton n, int j){
     for (int i=0;i<6;i++){
         if(grille[i][j].presenceJeton()==false){
@@ -50,6 +51,7 @@ public void afficherGrilleSurConsole(){
         }
     }
 }
+
 public void presenceJeton(int x, int y){
     grille[x][y].presenceJeton();
 }
@@ -159,11 +161,14 @@ public void supprimerJeton(int x, int y){
 public void recupererJeton(int x, int y){
     grille[x][y].recupererJeton();
 }
-public void presenceTrouNoir(int x, int y){
-    grille[x][y].presenceTrouNoir();
+public boolean presenceTrouNoir(int x, int y){
+    
+    boolean a = grille[x][y].presenceTrouNoir();
+    return a;
 }
-public void presenceDesintegrateur(int x, int y){
-    grille[x][y].presenceDesintegrateur();
+public boolean presenceDesintegrateur(int x, int y){
+    boolean a = grille[x][y].presenceDesintegrateur();
+    return a;
 }
 
 }

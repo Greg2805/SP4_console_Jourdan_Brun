@@ -23,7 +23,7 @@ public class Partie {
     public void attribuerCouleurAuxJoueurs (){
         Random generateurAleat = new Random();
         int n = generateurAleat.nextInt(1);
-        int temp = 0;
+        int temp;
         
         if (n==1){
             listeJoueurs[0].affecterCouleur("rouge");
@@ -53,5 +53,63 @@ public class Partie {
          }
     }
     
+    public void placerTrousNoirsEtDesintegrateurs() {
+        
+        Random generateurAleat = new Random();
+        for(int i=0;i<=3;i++){{
+            int colonne = generateurAleat.nextInt(6); //n nb collone
+            colonne+=1;
+            int ligne = generateurAleat.nextInt(5); // nb ligne
+            ligne+=1;
+                if (plateau.presenceTrouNoir(ligne, colonne)==false&&plateau.presenceDesintegrateur(ligne, colonne)==false){
+                    plateau.placerTrouNoir(ligne, colonne);
+                    plateau.placerDesintegrateur(ligne, colonne);
+                }
+                else{
+                    i-=1;
+                }
+            }
+        }
+        for(int i=0;i<=2;i++){{
+            int colonne = generateurAleat.nextInt(6); //n nb collone
+            colonne+=1;
+            int ligne = generateurAleat.nextInt(5); // nb ligne
+            ligne+=1;
+                if (plateau.presenceTrouNoir(ligne, colonne)==false&&plateau.presenceDesintegrateur(ligne, colonne)==false){
+                    plateau.placerTrouNoir(ligne, colonne);
+                }
+                else{
+                    i-=1;
+                }
+            }
+        }
+        for(int i=0;i<=3;i++){{
+            int colonne = generateurAleat.nextInt(6); //n nb collone
+            colonne+=1;
+            int ligne = generateurAleat.nextInt(5); // nb ligne
+            ligne+=1;
+                if (plateau.presenceTrouNoir(ligne, colonne)==false&&plateau.presenceDesintegrateur(ligne, colonne)==false){
+                    plateau.placerDesintegrateur(ligne, colonne);
+                }
+                else{
+                    i-=1;
+                }
+            }
+        
+        
+        }
+    }
+    
+    public void initialiserPartie() {
+        attribuerCouleurAuxJoueurs();
+        creerEtAffecterJeton(listeJoueurs [0]);
+        creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateurs();
+    }
+    
+    public void lancerPartie(){
+        initialiserPartie();
+        
+    }
     
 }
