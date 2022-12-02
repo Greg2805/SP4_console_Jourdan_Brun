@@ -18,6 +18,7 @@ public class Joueur {
     private int nombreDesintegrateurs;
     
     
+    
     public void Joueur (){
     
         nom="nom joueur pas enccore entré";
@@ -51,6 +52,7 @@ public class Joueur {
         return j;
     }
 
+
     
     public void obtenirDesintegrateur(){
         nombreDesintegrateurs +=1;
@@ -63,6 +65,7 @@ public class Joueur {
 
    
     
+
 
 }
 
