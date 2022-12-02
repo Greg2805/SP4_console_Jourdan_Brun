@@ -148,6 +148,9 @@ public void supprimerTrouNoir(int x, int y){
 public void placerDesintegrateur(int x,int y){
     grille[x][y].presenceDesintegrateur();
 }
+public void supprimerDesintegrateur(int x, int y){
+    grille[x][y].supprimerDesintegrateur();
+}
 
 public void supprimerJeton(int x, int y){
     grille[x][y].supprimerJeton();
@@ -155,6 +158,12 @@ public void supprimerJeton(int x, int y){
 
 public void recupererJeton(int x, int y){
     grille[x][y].recupererJeton();
+}
+public void presenceTrouNoir(int x, int y){
+    grille[x][y].presenceTrouNoir();
+}
+public void presenceDesintegrateur(int x, int y){
+    grille[x][y].presenceDesintegrateur();
 }
 
 }
