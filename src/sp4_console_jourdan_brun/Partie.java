@@ -5,6 +5,7 @@
 package sp4_console_jourdan_brun;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -108,8 +109,21 @@ public class Partie {
     }
     
     public void lancerPartie(){
-        initialiserPartie();
-        
+    Scanner saisieUtilisateur = new Scanner(System.in);
+    Random generateurAleat = new Random();
+    int jr = generateurAleat.nextInt(1);
+    if (jr==1){
+        joueurCourant=listeJoueurs [0];
+    }
+    else{
+        joueurCourant=listeJoueurs [1];
+    }
+    
+    System.out.println("Dans quelle colonne voulez vous jouer ?");
+    int colonne = saisieUtilisateur.nextInt();
+    
+
+
     }
     
 }
