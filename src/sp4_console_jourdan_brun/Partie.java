@@ -110,20 +110,114 @@ public class Partie {
     
     public void lancerPartie(){
     Scanner saisieUtilisateur = new Scanner(System.in);
-    Random generateurAleat = new Random();
-    int jr = generateurAleat.nextInt(1);
-    if (jr==1){
+//    Random generateurAleat = new Random();
+//    int jr = generateurAleat.nextInt(1);
+//    if (jr==1){
+//        joueurCourant=listeJoueurs [0];
+//    }
+//    else{
+//        joueurCourant=listeJoueurs [1];
+//    }
+    
+    System.out.println("A qui est ce le tour ?\nSi joueur 1 pressez 1 si joueur 2 pressez 2");
+    int jr = saisieUtilisateur.nextInt();
+    
+    if (jr== 1){
         joueurCourant=listeJoueurs [0];
     }
     else{
-        joueurCourant=listeJoueurs [1];
+        joueurCourant=listeJoueurs[1];
     }
     
-    System.out.println("Dans quelle colonne voulez vous jouer ?");
-    int colonne = saisieUtilisateur.nextInt();
+    System.out.println("Que souhaitez vous faire ?\nPlacer un jeton ? Tapez 1\nRetirer un jeton ? Tapez 2\nUtiliser un desintégrateur ? Tapez 3");
+    int choix=saisieUtilisateur.nextInt();
+    //1: placer jeton 2:Retirer Jeton 3:desintegrateur"
+    if (choix==1){
+        
+        if(joueurCourant.nombreDeJetons()>0){
+            
+            System.out.println("Dans quelle colonne voulez vous jouer ?");
+            int colonne = saisieUtilisateur.nextInt();
+            Jeton j_joué=joueurCourant.jouerJeton();
+            boolean cr=plateau.colonneRemplie(colonne);
+            if(cr==false){
+            plateau.ajouterJetonDansColonne(j_joué, colonne);
+            
+                for(int i=1;i<=6;i++){
+                    boolean a=plateau.presenceTrouNoir(colonne, i);
+                    if(a==true){
+                        plateau.supprimerTrouNoir(colonne, i);
+                        plateau.supprimerJeton(colonne, i);
+                    }
+                }
+            }
+            else{
+                System.out.println("cette colonne est pleine");
+            }
+            
+            
+            
+        }
+        else{
+            System.out.println("Vous n'avez plus de jeton.");
+        }
+        
+        String clr=joueurCourant.donnerCouleur();
+        boolean victoire = plateau.etreGagnantePourCouleur(clr);
+        if(victoire==true){
+            
+            System.out.println("victoire pour les "+clr);
+        }
+        
+    }
     
-
-
+    if (choix==2){
+        
+        System.out.println("Dans quelle colonne est le jeton que vous voulez retirer ?");
+        int colonne_r = saisieUtilisateur.nextInt();
+        System.out.println("Dans quelle ligne est le jeton que vous voulez retirer ?");
+        int ligne_r = saisieUtilisateur.nextInt();
+        boolean presence=plateau.presenceJeton(colonne_r, ligne_r);
+        if(presence==true){
+        plateau.recupererJeton(colonne_r, ligne_r);
+        plateau.tasserColone(colonne_r);
+        }
+        else{
+            System.out.println("il n'y a pas de jeton à retirer");
+        }
+        
+        String clr=joueurCourant.donnerCouleur();
+        boolean victoire = plateau.etreGagnantePourCouleur(clr);
+        if(victoire==true){
+            
+            System.out.println("victoire pour les "+clr);
+        }
+        
+    }
+    if(choix==3){
+        System.out.println("Dans quelle colonne est le jeton que vous voulez desintégrer ?");
+        int colonne_r = saisieUtilisateur.nextInt();
+        System.out.println("Dans quelle ligne est le jeton que vous voulez desintégrer ?");
+        int ligne_r = saisieUtilisateur.nextInt();
+        boolean presence=plateau.presenceJeton(colonne_r, ligne_r);
+        
+        if(presence==true){
+        plateau.supprimerJeton(colonne_r, ligne_r);
+        plateau.tasserColone(colonne_r);
+        }
+        else{
+            System.out.println("il n'y a pas de jeton à desintégrer");
+        }
+        joueurCourant.utiliserDesintegrateur();
+        
+        String clr=joueurCourant.donnerCouleur();
+        boolean victoire = plateau.etreGagnantePourCouleur(clr);
+        if(victoire==true){
+            
+            System.out.println("victoire pour les "+clr);
+        }
+        
+    }
     }
     
 }

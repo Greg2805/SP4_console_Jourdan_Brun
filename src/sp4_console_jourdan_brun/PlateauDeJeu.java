@@ -21,9 +21,12 @@ public PlateauDeJeu(){
 }
 
 public int ajouterJetonDansColonne(Jeton n, int j){
+    int test=0;
     for (int i=0;i<6;i++){
         if(grille[i][j].presenceJeton()==false){
             grille[i][j].affecterJeton(n);
+            
+                
             return i;
         }
     
@@ -52,8 +55,9 @@ public void afficherGrilleSurConsole(){
     }
 }
 
-public void presenceJeton(int x, int y){
-    grille[x][y].presenceJeton();
+public boolean presenceJeton(int x, int y){
+    boolean a=grille[x][y].presenceJeton();
+    return a;
 }
 
 public void  lireCouleurDuJeton(int x, int y){
