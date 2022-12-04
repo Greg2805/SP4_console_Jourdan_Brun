@@ -60,8 +60,9 @@ public boolean presenceJeton(int x, int y){
     return a;
 }
 
-public void  lireCouleurDuJeton(int x, int y){
-    grille[x][y].LireCouleurDuJeton();
+public String  lireCouleurDuJeton(int x, int y){
+    String a = grille[x][y].LireCouleurDuJeton();
+    return a;
 }
 
 
