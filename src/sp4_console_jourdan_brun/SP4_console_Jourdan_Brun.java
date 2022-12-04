@@ -15,7 +15,7 @@ public class SP4_console_Jourdan_Brun {
     /**
      * @param args the command line arguments
      */
-    public static void fmain(String[] args) {
+    public static void main(String[] args) {
         
          Jeton j1 = new Jeton("jaune");
          System.out.println(j1);
