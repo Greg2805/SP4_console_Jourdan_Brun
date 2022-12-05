@@ -19,9 +19,9 @@ public class Joueur {
     
     
     
-    public void Joueur (){
+    public Joueur (String n_j){
     
-        nom="nom joueur pas enccore entré";
+        nom=n_j;
         couleur="couleur non initialisée";
     }
     
@@ -53,7 +53,7 @@ public class Joueur {
     }
     
     
-    public Jeton jouerJeton (){
+    public Jeton jouerJeton (){ 
         int a = nombreDeJetons();
         Jeton j = reserveJetons.remove(a);
         return j;
