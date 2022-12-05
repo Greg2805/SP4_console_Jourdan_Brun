@@ -57,7 +57,7 @@ public class Partie {
     public void placerTrousNoirsEtDesintegrateurs() {
         
         Random generateurAleat = new Random();
-        for(int i=0;i<=3;i++){{
+        for(int i=0;i<=3;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -69,9 +69,9 @@ public class Partie {
                 else{
                     i-=1;
                 }
-            }
+            
         }
-        for(int i=0;i<=2;i++){{
+        for(int i=0;i<=2;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -82,9 +82,9 @@ public class Partie {
                 else{
                     i-=1;
                 }
-            }
+            
         }
-        for(int i=0;i<=3;i++){{
+        for(int i=0;i<=3;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -95,7 +95,7 @@ public class Partie {
                 else{
                     i-=1;
                 }
-            }
+            
         
         
         }
@@ -122,10 +122,20 @@ public class Partie {
     }
     
     public void lancerPartie(){
+        
         Scanner saisieUtilisateur = new Scanner(System.in);
 
-       
+        System.out.println("Quel est le nom du joueur 1");//On demande le nom du j1
+        String n_j1=saisieUtilisateur.nextLine();
+        Joueur J1=new Joueur(n_j1);
+        listeJoueurs[0]=J1;
+        
+        
 
+        System.out.println("Quel est le nom du joueur 2");//On demande le nom du j1
+        String n_j2=saisieUtilisateur.nextLine();
+        Joueur J2=new Joueur(n_j2);
+        listeJoueurs[1]=J2;
 
         Random generateurAleat = new Random();
         int jr = generateurAleat.nextInt(1);//on tire au sort quel joueur commence
@@ -228,8 +238,8 @@ public class Partie {
             }
 
         }
-        String nomGagnant=joueurCourant.retournerNom();
-        System.out.println(nomGagnant+"a gagné");
+        String nomGagnant=joueurCourant.retournerNom();//si on a quitté la boucle cela veut dire que le joueur
+        System.out.println(nomGagnant+"a gagné");//qui etait joueurCourant à gagné
     }
     
 }

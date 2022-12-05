@@ -19,7 +19,7 @@ public class Joueur {
     
     
     
-    public  Joueur (String n_j){
+    public Joueur (String n_j){
     
         nom=n_j;
         couleur="couleur non initialisée";
@@ -54,7 +54,7 @@ public class Joueur {
     }
     
     
-    public Jeton jouerJeton (){
+    public Jeton jouerJeton (){ 
         int a = nombreDeJetons();
         Jeton j = reserveJetons.remove(a);
         return j;
