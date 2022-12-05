@@ -25,6 +25,13 @@ public class Joueur {
         couleur="couleur non initialisée";
     }
     
+    public void donnerNom(String n_j){
+        nom=n_j;
+    }
+    
+    public String retournerNom(){
+        return nom;
+    }
     
     public void affecterCouleur(String clr_s){
         couleur=clr_s;
