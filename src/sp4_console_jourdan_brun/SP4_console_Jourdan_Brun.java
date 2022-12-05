@@ -20,6 +20,7 @@ public class SP4_console_Jourdan_Brun {
          Jeton j1 = new Jeton("jaune");
          System.out.println(j1);
          
+         CelluleDeGrille[][] grille = new CelluleDeGrille[6][7];
          
          
     }

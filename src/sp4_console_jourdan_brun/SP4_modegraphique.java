@@ -4,17 +4,160 @@
  */
 package sp4_console_jourdan_brun;
 
+import java.util.Random;
+
 /**
  *
  * @author Dell
  */
 public class SP4_modegraphique extends javax.swing.JFrame {
+private Joueur [] listeJoueurs = new Joueur[2]; 
+    private Joueur joueurCourant;
+    PlateauDeJeu plateau = new PlateauDeJeu () ;
+    
+    
+    public static void main(String args[]) {
+        
+        System.out.println("OK");
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SP4_modegraphique().setVisible(true);
+            }
+        });
+    }
+
+    
     /**
      * Creates new form SP4_modegraphique
      */
     public SP4_modegraphique() {
         initComponents();
+        panneau_info_joueur.setVisible(false);
+        panneau_info_partie.setVisible(false);
+        
+        
+        for(int i=5;i>=0;i--){
+            for(int j=0;j<7;j++){ 
+               CelluleGraphique cellGraph = new CelluleGraphique(plateau.grille[i][j]);
+               panneaugrille.add(cellGraph);
+            }
+        }
+    }
+    
+    public void Partie(Joueur joueur1, Joueur joueur2){
+        listeJoueurs [0]=joueur1;
+        listeJoueurs [1]=joueur2;
+    }
+    
+    public void attribuerCouleurAuxJoueurs (){
+        Random generateurAleat = new Random();
+        int n = generateurAleat.nextInt(1);
+        int temp;
+        
+        if (n==1){
+            listeJoueurs[0].affecterCouleur("rouge");
+            temp =0;
+        }
+        else{
+            listeJoueurs[0].affecterCouleur("jaune");
+            temp=1; 
+        }
+        
+        if(temp==0){
+            listeJoueurs[1].affecterCouleur("jaune");
+        }
+        else{
+        listeJoueurs[1].affecterCouleur("rouge");
+        }
+        
+    }
+    
+    public void creerEtAffecterJeton (Joueur j_jeton){
+        String clr_j = j_jeton.donnerCouleur();
+        
+         for (int i =0 ;i<=30;i++){
+             
+             j_jeton.ajouterJeton(new Jeton(clr_j));
+             
+         }
+    }
+    
+    public void placerTrousNoirsEtDesintegrateurs() {
+        
+        Random generateurAleat = new Random();
+        for(int i=0;i<=3;i++){{
+            int colonne = generateurAleat.nextInt(6); //n nb collone
+            colonne+=1;
+            int ligne = generateurAleat.nextInt(5); // nb ligne
+            ligne+=1;
+                if (plateau.presenceTrouNoir(ligne, colonne)==false&&plateau.presenceDesintegrateur(ligne, colonne)==false){
+                    plateau.placerTrouNoir(ligne, colonne);
+                    plateau.placerDesintegrateur(ligne, colonne);
+                }
+                else{
+                    i-=1;
+                }
+            }
+        }
+        for(int i=0;i<=2;i++){{
+            int colonne = generateurAleat.nextInt(6); //n nb collone
+            colonne+=1;
+            int ligne = generateurAleat.nextInt(5); // nb ligne
+            ligne+=1;
+                if (plateau.presenceTrouNoir(ligne, colonne)==false&&plateau.presenceDesintegrateur(ligne, colonne)==false){
+                    plateau.placerTrouNoir(ligne, colonne);
+                }
+                else{
+                    i-=1;
+                }
+            }
+        }
+        for(int i=0;i<=3;i++){{
+            int colonne = generateurAleat.nextInt(6); //n nb collone
+            colonne+=1;
+            int ligne = generateurAleat.nextInt(5); // nb ligne
+            ligne+=1;
+                if (plateau.presenceTrouNoir(ligne, colonne)==false&&plateau.presenceDesintegrateur(ligne, colonne)==false){
+                    plateau.placerDesintegrateur(ligne, colonne);
+                }
+                else{
+                    i-=1;
+                }
+            }
+        
+        
+        }
+    }
+    
+    public void initialiserPartie() {
+        attribuerCouleurAuxJoueurs();
+        creerEtAffecterJeton(listeJoueurs [0]);
+        creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateurs();
     }
 
     /**
@@ -88,7 +231,7 @@ public class SP4_modegraphique extends javax.swing.JFrame {
 
         panneau_info_partie.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 270, -1));
 
-        getContentPane().add(panneau_info_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 290, 170));
+        getContentPane().add(panneau_info_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, 290, 170));
 
         panneau_creation_partie.setBackground(new java.awt.Color(102, 255, 102));
         panneau_creation_partie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,46 +259,46 @@ public class SP4_modegraphique extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("infos joueurs ");
-        panneau_info_joueur.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        panneau_info_joueur.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         lbl_j1_desintegrateur.setText("désintégrateurjoueur1");
-        panneau_info_joueur.add(lbl_j1_desintegrateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
+        panneau_info_joueur.add(lbl_j1_desintegrateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
         jLabel5.setText("infos joueur 1 :");
-        panneau_info_joueur.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        panneau_info_joueur.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jLabel6.setText("couleur :");
-        panneau_info_joueur.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        panneau_info_joueur.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         lbl_j1_nom.setText("nomjoueur1");
-        panneau_info_joueur.add(lbl_j1_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, -1, -1));
+        panneau_info_joueur.add(lbl_j1_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
 
         jLabel8.setText("désintegrateurs :");
-        panneau_info_joueur.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        panneau_info_joueur.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         lbl_j1_couleur.setText("couleurjoueur1");
-        panneau_info_joueur.add(lbl_j1_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
-        panneau_info_joueur.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 163, 290, 10));
+        panneau_info_joueur.add(lbl_j1_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+        panneau_info_joueur.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 133, 290, 10));
 
         lbl_j2_desintegrateur.setText("désintégrateurjoueur2");
-        panneau_info_joueur.add(lbl_j2_desintegrateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
+        panneau_info_joueur.add(lbl_j2_desintegrateur, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
 
         jLabel7.setText("infos joueur 2 :");
-        panneau_info_joueur.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        panneau_info_joueur.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel9.setText("couleur :");
-        panneau_info_joueur.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        panneau_info_joueur.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         lbl_j2_nom.setText("nomjoueur2");
-        panneau_info_joueur.add(lbl_j2_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
+        panneau_info_joueur.add(lbl_j2_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
 
         jLabel10.setText("désintegrateurs :");
-        panneau_info_joueur.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        panneau_info_joueur.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         lbl_j2_couleur.setText("couleurjoueur2");
-        panneau_info_joueur.add(lbl_j2_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        panneau_info_joueur.add(lbl_j2_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
 
-        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 290, 270));
+        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 290, 240));
 
         Btn_col_0.setText("1");
         Btn_col_0.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +335,8 @@ public class SP4_modegraphique extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_startActionPerformed
-        // TODO add your handling code here:
+    panneau_info_joueur.setVisible(true);
+    panneau_info_partie.setVisible(true);        
     }//GEN-LAST:event_Btn_startActionPerformed
 
     private void Btn_col_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_0ActionPerformed
@@ -206,38 +350,7 @@ public class SP4_modegraphique extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SP4_modegraphique.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SP4_modegraphique().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_col_0;
     private javax.swing.JButton Btn_col_1;
