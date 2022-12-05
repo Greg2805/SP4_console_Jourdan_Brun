@@ -5,6 +5,7 @@
 package sp4_console_jourdan_brun;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -68,10 +69,7 @@ private Joueur [] listeJoueurs = new Joueur[2];
         }
     }
     
-    public void Partie(Joueur joueur1, Joueur joueur2){
-        listeJoueurs [0]=joueur1;
-        listeJoueurs [1]=joueur2;
-    }
+   
     
     public void attribuerCouleurAuxJoueurs (){
         Random generateurAleat = new Random();
@@ -94,6 +92,9 @@ private Joueur [] listeJoueurs = new Joueur[2];
         listeJoueurs[1].affecterCouleur("rouge");
         }
         
+       
+        
+        
     }
     
     public void creerEtAffecterJeton (Joueur j_jeton){
@@ -109,7 +110,7 @@ private Joueur [] listeJoueurs = new Joueur[2];
     public void placerTrousNoirsEtDesintegrateurs() {
         
         Random generateurAleat = new Random();
-        for(int i=0;i<=3;i++){{
+        for(int i=0;i<3;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -122,8 +123,8 @@ private Joueur [] listeJoueurs = new Joueur[2];
                     i-=1;
                 }
             }
-        }
-        for(int i=0;i<=2;i++){{
+        
+        for(int i=0;i<2;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -135,8 +136,8 @@ private Joueur [] listeJoueurs = new Joueur[2];
                     i-=1;
                 }
             }
-        }
-        for(int i=0;i<=3;i++){{
+        
+        for(int i=0;i<3;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -150,14 +151,42 @@ private Joueur [] listeJoueurs = new Joueur[2];
             }
         
         
-        }
+        
     }
     
     public void initialiserPartie() {
+        
+        String nomJoueur1 = nom_joueur1.getText();
+        Joueur J1=new Joueur (nomJoueur1);
+        String nomJoueur2 = nom_joueur2.getText();
+        Joueur J2=new Joueur (nomJoueur2); 
+        listeJoueurs[0]=J1;
+        listeJoueurs[1]=J2;
+        
+         lbl_j1_nom.setText(nomJoueur1);
+         lbl_j2_nom.setText(nomJoueur2);
+         
+         lbl_j1_desintegrateur.setText(J1.nombreDesintegrateur()+"");
+         lbl_j2_desintegrateur.setText(J2.nombreDesintegrateur()+"");
+         
+         
+         Random r = new Random();
+         boolean le_premier = r.nextBoolean();
+         if(le_premier){
+             joueurCourant = listeJoueurs[0];
+         }
+         else{
+             joueurCourant = listeJoueurs[1];
+         }
+         lbl_jcourant.setText(joueurCourant.nom);
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs [0]);
         creerEtAffecterJeton(listeJoueurs[1]);
         placerTrousNoirsEtDesintegrateurs();
+    
+         lbl_j1_couleur.setText(J1.couleur);
+         lbl_j2_couleur.setText(J2.couleur);
+         
     }
 
     /**
@@ -309,12 +338,27 @@ private Joueur [] listeJoueurs = new Joueur[2];
         getContentPane().add(Btn_col_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         Btn_col_1.setText("2");
+        Btn_col_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_col_1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Btn_col_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 20, -1, -1));
 
         Btn_col_2.setText("3");
+        Btn_col_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_col_2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Btn_col_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 20, -1, -1));
 
         Btn_col_3.setText("4");
+        Btn_col_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_col_3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Btn_col_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 20, -1, -1));
 
         Btn_col_4.setText("5");
@@ -326,9 +370,19 @@ private Joueur [] listeJoueurs = new Joueur[2];
         getContentPane().add(Btn_col_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 20, -1, -1));
 
         Btn_col_5.setText("6");
+        Btn_col_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_col_5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Btn_col_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
 
         Btn_col_6.setText("7");
+        Btn_col_6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_col_6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(Btn_col_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(626, 20, -1, -1));
 
         setBounds(0, 0, 1044, 672);
@@ -336,17 +390,68 @@ private Joueur [] listeJoueurs = new Joueur[2];
 
     private void Btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_startActionPerformed
     panneau_info_joueur.setVisible(true);
-    panneau_info_partie.setVisible(true);        
+    panneau_info_partie.setVisible(true); 
+    initialiserPartie();
+    plateau.afficherGrilleSurConsole();
+    panneaugrille.repaint();
+    Btn_start.setEnabled(false);
     }//GEN-LAST:event_Btn_startActionPerformed
 
     private void Btn_col_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_0ActionPerformed
         // TODO add your handling code here:
+        jouerDansColone(0);
+        joueurSuivant();
     }//GEN-LAST:event_Btn_col_0ActionPerformed
 
     private void Btn_col_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_4ActionPerformed
         // TODO add your handling code here:
+        jouerDansColone(4);
+        joueurSuivant();
     }//GEN-LAST:event_Btn_col_4ActionPerformed
 
+    private void Btn_col_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_1ActionPerformed
+        // TODO add your handling code here:
+        jouerDansColone(1);
+        joueurSuivant();
+    }//GEN-LAST:event_Btn_col_1ActionPerformed
+
+    private void Btn_col_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_2ActionPerformed
+        // TODO add your handling code here:
+        jouerDansColone(2);
+        joueurSuivant();
+    }//GEN-LAST:event_Btn_col_2ActionPerformed
+
+    private void Btn_col_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_3ActionPerformed
+        // TODO add your handling code here:
+        jouerDansColone(3);
+        joueurSuivant();
+    }//GEN-LAST:event_Btn_col_3ActionPerformed
+
+    private void Btn_col_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_5ActionPerformed
+        // TODO add your handling code here:
+        jouerDansColone(5);
+        joueurSuivant();
+    }//GEN-LAST:event_Btn_col_5ActionPerformed
+
+    private void Btn_col_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_col_6ActionPerformed
+        // TODO add your handling code here:
+        jouerDansColone(6);
+        joueurSuivant();
+    }//GEN-LAST:event_Btn_col_6ActionPerformed
+
+    public void joueurSuivant(){
+        if (joueurCourant==listeJoueurs[0] ){
+            joueurCourant=listeJoueurs[1];
+        }
+        else{
+          joueurCourant=listeJoueurs[0];
+          
+        }
+        lbl_jcourant.setText(joueurCourant.nom);
+    }
+    public boolean jouerDansColone(int indice_colone){
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
