@@ -46,9 +46,10 @@ public boolean grilleRemplie(){
             
         }
 public void afficherGrilleSurConsole(){
+    System.out.println("affichage");
     for (int i=5;i>0;i--){
-        for (int j=6;i>0;i--){
-            grille[i][j].toString();
+        for (int j=0;j<7;j++){
+            System.out.print(grille[i][j]);
             
             
         }
@@ -153,7 +154,8 @@ public void supprimerTrouNoir(int x, int y){
 }
 
 public void placerDesintegrateur(int x,int y){
-    grille[x][y].presenceDesintegrateur();
+    
+    grille[x][y].placerDesintegrateur();
 }
 public void supprimerDesintegrateur(int x, int y){
     grille[x][y].supprimerDesintegrateur();

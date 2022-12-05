@@ -102,6 +102,19 @@ public class Partie {
     }
     
     public void initialiserPartie() {
+        Scanner saisieUtilisateur = new Scanner(System.in);
+        
+         System.out.println("Quel est le nom du joueur 1");//On demande le nom du j1
+        String n_j1=saisieUtilisateur.nextLine();
+        Joueur J1=new Joueur (n_j1); 
+        listeJoueurs[0]=J1;
+       
+       
+
+         System.out.println("Quel est le nom du joueur 2");//On demande le nom du j1
+        String n_j2=saisieUtilisateur.nextLine();
+        Joueur J2=new Joueur (n_j2); 
+        listeJoueurs[1]=J2;
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs [0]);
         creerEtAffecterJeton(listeJoueurs[1]);
@@ -111,13 +124,8 @@ public class Partie {
     public void lancerPartie(){
         Scanner saisieUtilisateur = new Scanner(System.in);
 
-        System.out.println("Quel est le nom du joueur 1");//On demande le nom du j1
-        String n_j1=saisieUtilisateur.next();
-        listeJoueurs[0].donnerNom(n_j1);//On affecte le nom à j1
+       
 
-        System.out.println("Quel est le nom du joueur 2 ");
-        String n_j2=saisieUtilisateur.next();
-        listeJoueurs[1].donnerNom(n_j2);
 
         Random generateurAleat = new Random();
         int jr = generateurAleat.nextInt(1);//on tire au sort quel joueur commence
