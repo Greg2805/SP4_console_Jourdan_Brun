@@ -16,9 +16,10 @@ public class Partie {
     private Joueur joueurCourant;
     private PlateauDeJeu plateau;
     
-    public void Partie(Joueur joueur1, Joueur joueur2){
+    public  Partie(Joueur joueur1, Joueur joueur2){
         listeJoueurs [0]=joueur1;
         listeJoueurs [1]=joueur2;
+        plateau=new PlateauDeJeu();
     }
     
     public void attribuerCouleurAuxJoueurs (){
@@ -57,7 +58,8 @@ public class Partie {
     public void placerTrousNoirsEtDesintegrateurs() {
         
         Random generateurAleat = new Random();
-        for(int i=0;i<=3;i++){
+        
+        for(int i=1;i<=3;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -71,7 +73,7 @@ public class Partie {
                 }
             
         }
-        for(int i=0;i<=2;i++){
+        for(int i=1;i<=2;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -84,7 +86,7 @@ public class Partie {
                 }
             
         }
-        for(int i=0;i<=3;i++){
+        for(int i=1;i<=2;i++){
             int colonne = generateurAleat.nextInt(6); //n nb collone
             colonne+=1;
             int ligne = generateurAleat.nextInt(5); // nb ligne
@@ -104,27 +106,6 @@ public class Partie {
     public void initialiserPartie() {
         Scanner saisieUtilisateur = new Scanner(System.in);
         
-         System.out.println("Quel est le nom du joueur 1");//On demande le nom du j1
-        String n_j1=saisieUtilisateur.nextLine();
-        Joueur J1=new Joueur (n_j1); 
-        listeJoueurs[0]=J1;
-       
-       
-
-         System.out.println("Quel est le nom du joueur 2");//On demande le nom du j1
-        String n_j2=saisieUtilisateur.nextLine();
-        Joueur J2=new Joueur (n_j2); 
-        listeJoueurs[1]=J2;
-        attribuerCouleurAuxJoueurs();
-        creerEtAffecterJeton(listeJoueurs [0]);
-        creerEtAffecterJeton(listeJoueurs[1]);
-        placerTrousNoirsEtDesintegrateurs();
-    }
-    
-    public void lancerPartie(){
-        
-        Scanner saisieUtilisateur = new Scanner(System.in);
-
         System.out.println("Quel est le nom du joueur 1");//On demande le nom du j1
         String n_j1=saisieUtilisateur.nextLine();
         Joueur J1=new Joueur(n_j1);
@@ -136,6 +117,19 @@ public class Partie {
         String n_j2=saisieUtilisateur.nextLine();
         Joueur J2=new Joueur(n_j2);
         listeJoueurs[1]=J2;
+        
+        
+        attribuerCouleurAuxJoueurs();
+        creerEtAffecterJeton(listeJoueurs [0]);
+        creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateurs();
+    }
+    
+    public void lancerPartie(){
+        
+        Scanner saisieUtilisateur = new Scanner(System.in);
+
+        
 
         Random generateurAleat = new Random();
         int jr = generateurAleat.nextInt(1);//on tire au sort quel joueur commence
@@ -144,6 +138,8 @@ public class Partie {
         boolean victoire=false;
 
         while (victoire!=true){//tant que personne n'a gagné on continu de jouer
+//            System.out.println("\n");
+            plateau.afficherGrilleSurConsole();
 
             if (jr== 1){
                 joueurCourant=listeJoueurs [0];//si le tirage au sort tombe sur 1 cest le joueur dans la casse 0 qui commence
@@ -153,7 +149,7 @@ public class Partie {
                 joueurCourant=listeJoueurs[1]; //idem que si jr==1 avec jr==0
                 jr=1;
             }
-
+            System.out.println("cest au tour de "+joueurCourant.retournerNom());
             System.out.println("Que souhaitez vous faire ?\nPlacer un jeton ? Tapez 1\nRetirer un jeton ? Tapez 2\nUtiliser un desintégrateur ? Tapez 3");
             int choix=saisieUtilisateur.nextInt();
             //1: placer jeton 2:Retirer Jeton 3:desintegrateur"
@@ -167,15 +163,25 @@ public class Partie {
                 Jeton j_joué=joueurCourant.jouerJeton();//cette ligne crée le jeton qui va être joué et le retire du sac de jeton du joueur
                 boolean cr=plateau.colonneRemplie(colonne);//on vérifie que la colonne n'est pas remplie
                 if(cr==false){//si la colonne n'est pas remplie on place le jeton
-                plateau.ajouterJetonDansColonne(j_joué, colonne);
+                int ligne_j =plateau.ajouterJetonDansColonne(j_joué, colonne);
 
-                    for(int i=1;i<=6;i++){//on verifie qu'il n'y a pas de jeton dans la colonne ou on a joué sinon on retire le jeotn et le trou noir
-                        boolean a=plateau.presenceTrouNoir(colonne, i);
-                        if(a==true){
-                            plateau.supprimerTrouNoir(colonne, i);
-                            plateau.supprimerJeton(colonne, i);
-                        }
+                    boolean a=plateau.presenceTrouNoir(ligne_j, colonne);
+                    if(a==true&&plateau.presenceDesintegrateur(ligne_j, colonne)==true){
+                        plateau.supprimerTrouNoir(ligne_j, colonne);
+                        plateau.supprimerJeton(ligne_j, colonne);
+                        plateau.supprimerDesintegrateur(ligne_j, colonne);
+                        joueurCourant.obtenirDesintegrateur();
                     }
+                
+                        if(plateau.presenceDesintegrateur(ligne_j, colonne)==true){
+                            plateau.supprimerDesintegrateur(ligne_j, colonne);
+                            joueurCourant.obtenirDesintegrateur();
+                        }
+                        if(a==true){
+                            plateau.supprimerTrouNoir(ligne_j, colonne);
+                            plateau.supprimerJeton(ligne_j, colonne);
+                        }
+                        
                 }
                 else{
                     System.out.println("cette colonne est pleine");
@@ -204,7 +210,7 @@ public class Partie {
             String clr_j=joueurCourant.donnerCouleur();
             String clr_jt=plateau.lireCouleurDuJeton(colonne_r, ligne_r);
             if(presence==true & clr_j==clr_jt){//on vérifie s'il y en a un et s'il est de la couleur du joueur courant
-                plateau.recupererJeton(colonne_r, ligne_r);
+                plateau.recupererJeton(ligne_r, colonne_r);
                 plateau.tasserColone(colonne_r);
             }
             else{
@@ -221,10 +227,10 @@ public class Partie {
             int colonne_r = saisieUtilisateur.nextInt();
             System.out.println("Dans quelle ligne est le jeton que vous voulez desintégrer ?");
             int ligne_r = saisieUtilisateur.nextInt();
-            boolean presence=plateau.presenceJeton(colonne_r, ligne_r);
+            boolean presence=plateau.presenceJeton(ligne_r, colonne_r);
 
             if(presence==true){
-                plateau.supprimerJeton(colonne_r, ligne_r);
+                plateau.supprimerJeton(ligne_r, colonne_r);
                 plateau.tasserColone(colonne_r);
             }
             else{

@@ -458,6 +458,7 @@ private Joueur [] listeJoueurs = new Joueur[2];
     }
     public boolean jouerDansColone(int indice_colone){
         panneaugrille.repaint();
+       
 
         
         if(joueurCourant.nombreDeJetons()>0){//on vérifie que le joueur possede encore des jetons
@@ -470,15 +471,44 @@ private Joueur [] listeJoueurs = new Joueur[2];
                 int lig = plateau.ajouterJetonDansColonne(j_joué, indice_colone);
 
                         boolean a=plateau.presenceTrouNoir(lig,indice_colone);
+                        if(a==true&&plateau.presenceDesintegrateur(lig, indice_colone)==true){
+                        plateau.supprimerTrouNoir(lig, indice_colone);
+                        plateau.supprimerJeton(lig, indice_colone);
+                        plateau.supprimerDesintegrateur(lig, indice_colone);
+                        joueurCourant.obtenirDesintegrateur();
+                        
+                    }
+                        
+                
+                        if(plateau.presenceDesintegrateur(lig, indice_colone)==true){
+                            plateau.supprimerDesintegrateur(lig, indice_colone);
+                            joueurCourant.obtenirDesintegrateur();
+                        }
                         if(a==true){
                             plateau.supprimerTrouNoir(lig,indice_colone);
                             plateau.supprimerJeton(lig,indice_colone);
                         }
+        lbl_j1_desintegrateur.setText(listeJoueurs[0].nombreDesintegrateur()+"");
+        lbl_j2_desintegrateur.setText(listeJoueurs[1].nombreDesintegrateur()+"");  
+        
+        boolean vict_j1 = plateau.etreGagnantePourCouleur(listeJoueurs[0].donnerCouleur());
+        boolean vict_j2 = plateau.etreGagnantePourCouleur(listeJoueurs[1].donnerCouleur());
+        
+        if (vict_j1 && ! vict_j2 ) message.setText("Victoire de "+listeJoueurs[0].nom);
+        if (vict_j2 && ! vict_j1 ) message.setText("Victoire de "+listeJoueurs[1].nom);
+        
+        if (vict_j1 &&  vict_j2){
+           if(joueurCourant==listeJoueurs[0])message.setText("Victoire de "+listeJoueurs[1].nom+"(faute de jeu de l'autre joueur)");
+           else message.setText("Victoire de "+listeJoueurs[0].nom+"(faute de jeu de l'autre joueur)");
+        }
+        
+        
                     }   return true;
                 }
                 else{
                     return true;
                 }
+        
 
 
 

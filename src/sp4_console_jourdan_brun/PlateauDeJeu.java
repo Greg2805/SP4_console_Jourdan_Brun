@@ -47,9 +47,9 @@ public boolean grilleRemplie(){
             
         }
 public void afficherGrilleSurConsole(){
-    System.out.println("affichage");
-    for (int i=5;i>0;i--){
-        for (int j=0;j<7;j++){
+    for (int i=5;i>=0;i--){
+        System.out.print("\n");
+        for (int j=6;j>=0;j--){
             System.out.print(grille[i][j]);
             
             
@@ -69,9 +69,9 @@ public String  lireCouleurDuJeton(int x, int y){
 
 
 public boolean ligneGagnantePourCouleur(String C){
-    for (int i=5;i>0;i--){
-        for (int j=3;j>0;i--){
-            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i][j+1].LireCouleurDuJeton()& C==grille[i][j+2].LireCouleurDuJeton() & C==grille[i][j+3].LireCouleurDuJeton()){
+    for (int i=5;i>=0;i--){
+        for (int j=3;j>=0;j--){
+            if (C.equals(grille[i][j].LireCouleurDuJeton())& C.equals(grille[i][j+1].LireCouleurDuJeton())& C.equals(grille[i][j+2].LireCouleurDuJeton()) & C.equals(grille[i][j+3].LireCouleurDuJeton())){
                 return true;
             }
         }
@@ -80,9 +80,9 @@ return false;
 }
 
 public boolean colonneGagnantePourCouleur(String C){
-    for (int i=2;i>0;i--){
-        for (int j=6;j>0;i--){
-            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i+1][j].LireCouleurDuJeton()& C==grille[i+2][j].LireCouleurDuJeton() & C==grille[i+3][j].LireCouleurDuJeton()){
+    for (int i=2;i>=0;i--){
+        for (int j=6;j>=0;j--){
+            if (C.equals(grille[i][j].LireCouleurDuJeton())& C.equals(grille[i+1][j].LireCouleurDuJeton())& C.equals(grille[i+2][j].LireCouleurDuJeton()) & C.equals(grille[i+3][j].LireCouleurDuJeton())){
                 return true;
         }
         }
@@ -91,9 +91,9 @@ public boolean colonneGagnantePourCouleur(String C){
 }
 
 public boolean diagonaleMontanteGagnantePourCouleur(String C){
-    for (int i=2;i>0;i--){
-        for (int j=3;j>0;i--){
-            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i+1][j+1].LireCouleurDuJeton()& C==grille[i+2][j+2].LireCouleurDuJeton() & C==grille[i+3][j+3].LireCouleurDuJeton()){
+    for (int i=2;i>=0;i--){
+        for (int j=3;j>=0;j--){
+            if (C.equals(grille[i][j].LireCouleurDuJeton())& C.equals(grille[i+1][j+1].LireCouleurDuJeton())& C.equals(grille[i+2][j+2].LireCouleurDuJeton()) & C.equals(grille[i+3][j+3].LireCouleurDuJeton())){
                 return true;
         }
         }
@@ -102,9 +102,9 @@ public boolean diagonaleMontanteGagnantePourCouleur(String C){
 }
 
 public boolean diagonaleDesencanteGagnantePourCouleur(String C){
-    for (int i=5;i>3;i--){
-        for (int j=3;j>0;i--){
-            if (C==grille[i][j].LireCouleurDuJeton()& C==grille[i-1][j+1].LireCouleurDuJeton()& C==grille[i-2][j+2].LireCouleurDuJeton() & C==grille[i-3][j+3].LireCouleurDuJeton()){
+    for (int i=5;i>=3;i--){
+        for (int j=3;j>=0;j--){
+            if (C.equals(grille[i][j].LireCouleurDuJeton())& C.equals(grille[i-1][j+1].LireCouleurDuJeton())& C.equals(grille[i-2][j+2].LireCouleurDuJeton()) & C.equals(grille[i-3][j+3].LireCouleurDuJeton())){
                 return true;
         }
         }
@@ -155,7 +155,6 @@ public void supprimerTrouNoir(int x, int y){
 }
 
 public void placerDesintegrateur(int x,int y){
-    
     grille[x][y].placerDesintegrateur();
 }
 public void supprimerDesintegrateur(int x, int y){
