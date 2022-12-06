@@ -10,7 +10,7 @@ package sp4_console_jourdan_brun;
  * @author grego
  */
 public class CelluleDeGrille {
-    private Jeton jetonCourant;
+    public Jeton jetonCourant;
     private boolean avoirTrouNoir;
     private boolean avoirDesintegrateur;
     

@@ -29,6 +29,7 @@ public int ajouterJetonDansColonne(Jeton n, int j){
                 
             return i;
         }
+        
     
 }
     return -1;

@@ -55,8 +55,8 @@ public class Joueur {
     
     
     public Jeton jouerJeton (){ 
-        int a = nombreDeJetons();
-        Jeton j = reserveJetons.remove(a);
+        
+        Jeton j = reserveJetons.remove(0);
         return j;
     }
 
