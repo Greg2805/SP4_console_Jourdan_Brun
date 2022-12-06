@@ -116,36 +116,43 @@ public void activerTrouNoir(){
 }
 
     @Override
-public String toString() { 
+public String toString() {
 
-    String clr=LireCouleurDuJeton();
-    String chaine_a_retourner;
-
-    chaine_a_retourner="erreur";
-
-    if (jetonCourant==null){
-        chaine_a_retourner=".";
+    if (this.presenceJeton()==false){
+        
     
 
-        if(clr=="rouge"){
-            chaine_a_retourner="R";   
+        
+        
+        if(this.presenceTrouNoir()==true&&this.presenceDesintegrateur()==true){
+            return"@";
         }
-
-        if (clr=="jaune"){
-            chaine_a_retourner="J";
+        
+         if(this.presenceTrouNoir()==true){
+            return"@";
         }
-        if(avoirDesintegrateur==true){
-            chaine_a_retourner="D";
+        
+        if(this.presenceDesintegrateur()==true){
+            return"D";
         }
-        if(avoirTrouNoir==true){
-            chaine_a_retourner="@";
-        }
-            
+        return".";
     }
-    return chaine_a_retourner;
+        
+    
+    else{
+    if(this.LireCouleurDuJeton()=="rouge"){
+            return "R";   
+        }
 
+        if (this.LireCouleurDuJeton()=="jaune"){
+            return"J";
+ 
+        }
     }
-
+    return "!";
 }
+}
+
+
 
 

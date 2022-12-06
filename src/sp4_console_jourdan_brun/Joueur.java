@@ -23,6 +23,7 @@ public class Joueur {
     
         nom=n_j;
         couleur="couleur non initialisée";
+        reserveJetons=new ArrayList();
     }
     
     public void donnerNom(String n_j){
@@ -49,13 +50,14 @@ public class Joueur {
     
     
     public void ajouterJeton(Jeton ajout){
+        
         reserveJetons.add(ajout);
     }
     
     
     public Jeton jouerJeton (){ 
-        int a = nombreDeJetons();
-        Jeton j = reserveJetons.remove(a);
+       
+        Jeton j = reserveJetons.remove(0);
         return j;
     }
 

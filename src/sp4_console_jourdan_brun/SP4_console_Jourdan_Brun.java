@@ -15,12 +15,18 @@ public class SP4_console_Jourdan_Brun {
     /**
      * @param args the command line arguments
      */
-    public static void mmain(String[] args) {
+    public static void main(String[] args) {
+        Joueur J1=new Joueur("greg");
+        Joueur J2=new Joueur("quentin");
+        Partie Jouons=new Partie(J1, J2);
         
-         Jeton j1 = new Jeton("jaune");
-         System.out.println(j1);
-         
-         CelluleDeGrille[][] grille = new CelluleDeGrille[6][7];
+        Jouons.initialiserPartie();
+        
+        System.out.println("lancement partie");
+        
+        Jouons.lancerPartie();
+        
+//        CelluleDeGrille[][] grille = new CelluleDeGrille[6][7];
          
          
     }
