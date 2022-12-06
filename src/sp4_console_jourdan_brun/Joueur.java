@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class Joueur {
     
-    private String nom;
-    private String couleur;
+    public String nom;
+    public String couleur;
     private ArrayList<Jeton> reserveJetons;
     private int nombreDesintegrateurs;
     
@@ -65,6 +65,9 @@ public class Joueur {
     
     public void obtenirDesintegrateur(){
         nombreDesintegrateurs +=1;
+    }
+    public int nombreDesintegrateur(){
+        return nombreDesintegrateurs;
     }
     
     public void utiliserDesintegrateur(){
